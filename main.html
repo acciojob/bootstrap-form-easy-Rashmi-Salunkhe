@@ -1,16 +1,179 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Form</title>
+    <style>
+        .form-container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-container input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        .form-container button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+		 .form-container button[type="submit"] {
+        background-color: #007bff; /* Blue color */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .form-container button[type="submit"]:hover {
+        background-color: #0069d9; /* Darker blue on hover */
+    }
+	</style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <div class="form-container">
+        <h2>Internship Form</h2>
+        <form action="#">
+            <label for="first-name-input">First Name:</label>
+            <input type="text" id="first-name-input" name="first-name" placeholder="First Name">
+            <span class="error-message" id="first-name-error"></span>
+            <label for="last-name-input">Last Name:</label>
+            <input type="text" id="last-name-input" name="last-name" placeholder="Last Name">
+            <span class="error-message" id="last-name-error"></span>
+            <label for="email-input">Email Address:</label>
+            <input type="email" id="email-input" name="email" placeholder="xyz@abc.com">
+            <span class="error-message" id="email-error"></span>
+            <label for="college-input">College:</label>
+            <input type="text" id="college-input" name="college" placeholder="College">
+            <span class="error-message" id="college-error"></span>
+            <label for="graduation-year-select">Graduation Year:</label>
+            <select id="graduation-year-select" name="graduation-year">
+                <option value="">Choose...</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+            </select>
+            <span class="error-message" id="graduation-year-error"></span>
+            <label for="roll-no-input">Roll No.:</label>
+            <input type="text" id="roll-no-input" name="roll-no" placeholder="Roll No.">
+            <span class="error-message" id="roll-no-error"></span>
+            <input type="checkbox" id="conditions-checkbox" name="conditions">
+            <label for="conditions-checkbox">Agree to terms and conditions</label>
+            <button type="submit">Submit form</button>
+        </form>
+    </div>
+    <script>
+        const firstNameInput = document.getElementById("first-name-input");
+        const lastNameInput = document.getElementById("last-name-input");
+        const emailInput = document.getElementById("email-input");
+        const collegeInput = document.getElementById("college-input");
+        const graduationYearSelect = document.getElementById("graduation-year-select");
+        const rollNoInput = document.getElementById("roll-no-input");
+        const conditionsCheckbox = document.getElementById("conditions-checkbox");
 
+        const firstNameError = document.getElementById("first-name-error");
+        const lastNameError = document.getElementById("last-name-error");
+        const emailError = document.getElementById("email-error");
+        const collegeError = document.getElementById("college-error");
+        const graduationYearError = document.getElementById("graduation-year-error");
+        const rollNoError = document.getElementById("roll-no-error");
+
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault(); 
+
+            let isValid = true;
+
+            if (firstNameInput.value.trim() === "") {
+                firstNameError.textContent = "First name required!";
+                isValid = false;
+            } else {
+                firstNameError.textContent = "";
+            }
+
+            if (lastNameInput.value.trim() === "") {
+                lastNameError.textContent = "Last name required!";
+                isValid = false;
+            } else {
+                lastNameError.textContent = "";
+            }
+
+            if (emailInput.value.trim() === "" || !validateEmail(emailInput.value)) {
+                emailError.textContent = "Email required!";
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            if (collegeInput.value.trim() === "") {
+                collegeError.textContent = "Please provide a valid college.";
+                isValid = false;
+            } else {
+                collegeError.textContent = "";
+            }
+
+            if (graduationYearSelect.value === "") {
+                graduationYearError.textContent = "Please select a valid Graduation Year.";
+                isValid = false;
+            } else {
+                graduationYearError.textContent = "";
+            }
+
+            if (rollNoInput.value.trim() === "") {
+                rollNoError.textContent = "Please provide a valid Roll no.";
+                isValid = false;
+            } else {
+                rollNoError.textContent = "";
+            }
+
+            if (!conditionsCheckbox.checked) {
+                alert("You must agree to the terms and conditions.");
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Submit the form if all validations pass
+                form.submit();
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
 </body>
-
 </html>
