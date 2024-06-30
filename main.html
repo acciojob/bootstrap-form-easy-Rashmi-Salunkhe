@@ -67,16 +67,16 @@
         <form action="#">
             <label for="first-name-input" class="form-label">First Name:</label>
             <input type="text" id="first-name-input" class="form-control" name="first-name" placeholder="First Name" required>
-            <span class="error-message" id="first-name-error"></span>
+           <div class="invalid-feedback" id="first-name-error"></div>
             <label for="last-name-input" class="form-label">Last Name:</label>
             <input type="text" id="last-name-input" class="form-control" name="last-name" placeholder="Last Name" required>
-            <span class="error-message" id="last-name-error"></span>
+            <div class="invalid-feedback" id="last-name-error"></div>
             <label for="email-input" class="form-label">Email Address:</label>
             <input type="email" id="email-input" class="form-control" name="email" placeholder="xyz@abc.com" required>
-            <span class="error-message" id="email-error"></span>
+            <div class="invalid-feedback" id="email-error"></div>
             <label for="college-input" class="form-label">College:</label>
             <input type="text" id="college-input" class="form-control" name="college" placeholder="College" required>
-            <span class="error-message" id="college-error"></span>
+           <div class="invalid-feedback" id="college-error"></div>
             <label for="grad-year-select" class="form-label">Graduation Year:</label>
             <select id="grad-year-select" class="form-select" name="graduation-year" required>
                 <option value="">Choose...</option>
@@ -85,95 +85,88 @@
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
             </select>
-            <span class="error-message" id="graduation-year-error"></span>
+           <div class="invalid-feedback" id="graduation-year-error"></div>
             <label for="roll-no-input" class="form-label">Roll No.:</label>
             <input type="text" id="roll-no-input" class="form-control" name="roll-no" placeholder="Roll No." required>
-            <span class="error-message" id="roll-no-error"></span>
+           <div class="invalid-feedback" id="roll-no-error"></div>
             <input type="checkbox" id="conditions-checkbox" class="form-check-input" name="conditions" required>
             <label for="conditions-checkbox" class="form-label">Agree to terms and conditions</label>
             <button type="submit">Submit form</button>
         </form>
     </div>
     <script>
-        const firstNameInput = document.getElementById("first-name-input");
-        const lastNameInput = document.getElementById("last-name-input");
-        const emailInput = document.getElementById("email-input");
-        const collegeInput = document.getElementById("college-input");
-        const graduationYearSelect = document.getElementById("grad-year-select");
-        const rollNoInput = document.getElementById("roll-no-input");
-        const conditionsCheckbox = document.getElementById("conditions-checkbox");
+    const firstNameError = document.getElementById("first-name-error");
+    const lastNameError = document.getElementById("last-name-error");
+    const emailError = document.getElementById("email-error");
+    const collegeError = document.getElementById("college-error");
+    const graduationYearError = document.getElementById("graduation-year-error");
+    const rollNoError = document.getElementById("roll-no-error");
 
-        const firstNameError = document.getElementById("first-name-error");
-        const lastNameError = document.getElementById("last-name-error");
-        const emailError = document.getElementById("email-error");
-        const collegeError = document.getElementById("college-error");
-        const graduationYearError = document.getElementById("graduation-year-error");
-        const rollNoError = document.getElementById("roll-no-error");
+    const form = document.querySelector("form");
 
-        const form = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault(); 
 
-        form.addEventListener("submit", (event) => {
-            event.preventDefault(); 
+        let isValid = true;
 
-            let isValid = true;
-
-            if (firstNameInput.value.trim() === "") {
-                firstNameError.textContent = "First name required!";
-                isValid = false;
-            } else {
-                firstNameError.textContent = "";
-            }
-
-            if (lastNameInput.value.trim() === "") {
-                lastNameError.textContent = "Last name required!";
-                isValid = false;
-            } else {
-                lastNameError.textContent = "";
-            }
-
-            if (emailInput.value.trim() === "" || !validateEmail(emailInput.value)) {
-                emailError.textContent = "Email required!";
-                isValid = false;
-            } else {
-                emailError.textContent = "";
-            }
-
-            if (collegeInput.value.trim() === "") {
-                collegeError.textContent = "Please provide a valid college.";
-                isValid = false;
-            } else {
-                collegeError.textContent = "";
-            }
-
-            if (graduationYearSelect.value === "") {
-                graduationYearError.textContent = "Please select a valid Graduation Year.";
-                isValid = false;
-            } else {
-                graduationYearError.textContent = "";
-            }
-
-            if (rollNoInput.value.trim() === "") {
-                rollNoError.textContent = "Please provide a valid Roll no.";
-                isValid = false;
-            } else {
-                rollNoError.textContent = "";
-            }
-
-            if (!conditionsCheckbox.checked) {
-                alert("You must agree to the terms and conditions.");
-                isValid = false;
-            }
-
-            if (isValid) {
-                // Submit the form if all validations pass
-                form.submit();
-            }
-        });
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
+        if (firstNameInput.value.trim() === "") {
+            firstNameError.textContent = "First name required!";
+            isValid = false;
+        } else {
+            firstNameError.textContent = "";
         }
-    </script>
+
+        if (lastNameInput.value.trim() === "") {
+            lastNameError.textContent = "Last name required!";
+            isValid = false;
+        } else {
+            lastNameError.textContent = "";
+        }
+
+        if (emailInput.value.trim() === "" || !validateEmail(emailInput.value)) {
+            emailError.textContent = "Email required!";
+            isValid = false;
+        } else {
+            emailError.textContent = "";
+        }
+
+        if (collegeInput.value.trim() === "") {
+            collegeError.textContent = "Please provide a valid college.";
+            isValid = false;
+        } else {
+            collegeError.textContent = "";
+        }
+
+        if (graduationYearSelect.value === "") {
+            graduationYearError.textContent = "Please select a valid Graduation Year.";
+            isValid = false;
+        } else {
+            graduationYearError.textContent = "";
+        }
+
+        if (rollNoInput.value.trim() === "") {
+            rollNoError.textContent = "Please provide a valid Roll no.";
+            isValid = false;
+        } else {
+            rollNoError.textContent = "";
+        }
+
+        if (!conditionsCheckbox.checked) {
+            alert("You must agree to the terms and conditions.");
+            isValid = false;
+        }
+
+        if (isValid) {
+            // Submit the form if all validations pass
+            form.submit();
+        }
+    });
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+</script>
+         </script>
 </body>
 </html>
