@@ -72,12 +72,12 @@
             <input type="text" id="last-name-input" class="form-control" name="last-name" placeholder="Last Name" required>
             <span class="error-message" id="last-name-error"></span>
             <label for="email-input" class="form-label">Email Address:</label>
-            <input type="email" id="email-input" class="form-control" name="email" placeholder="xyz@abc.com">
+            <input type="email" id="email-input" class="form-control" name="email" placeholder="xyz@abc.com" required>
             <span class="error-message" id="email-error"></span>
             <label for="college-input" class="form-label">College:</label>
-            <input type="text" id="college-input" class="form-control" name="college" placeholder="College">
+            <input type="text" id="college-input" class="form-control" name="college" placeholder="College" required>
             <span class="error-message" id="college-error"></span>
-            <label for="grad-year-select" class="form-label">Graduation Year:</label>
+            <label for="grad-year-select" class="form-select">Graduation Year:</label>
             <select id="grad-year-select" name="graduation-year">
                 <option value="">Choose...</option>
                 <option value="2020">2020</option>
@@ -87,9 +87,9 @@
             </select>
             <span class="error-message" id="graduation-year-error"></span>
             <label for="roll-no-input" class="form-label">Roll No.:</label>
-            <input type="text" id="roll-no-input" class="form-control" name="roll-no" placeholder="Roll No.">
+            <input type="text" id="roll-no-input" class="form-control" name="roll-no" placeholder="Roll No." required>
             <span class="error-message" id="roll-no-error"></span>
-            <input type="checkbox" id="conditions-checkbox" class="form-control" name="conditions">
+            <input type="checkbox" id="conditions-checkbox" class="form-control" name="conditions" required>
             <label for="conditions-checkbox" class="form-label">Agree to terms and conditions</label>
             <button type="submit">Submit form</button>
         </form>
